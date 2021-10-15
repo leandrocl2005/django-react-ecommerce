@@ -8,8 +8,14 @@ function SearchBox() {
 
     let history = useHistory()
 
+    const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        if (keyword) {
+            history.push(`/?keyword=${keyword}&page=1`)
+        }
+    }
     return (
-        <Form onSubmit={() => {}} inline>
+        <Form onSubmit={() => { }} inline>
             <Form.Control
                 type='text'
                 name='q'
