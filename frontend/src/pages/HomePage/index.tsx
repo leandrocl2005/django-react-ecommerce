@@ -1,8 +1,29 @@
-import {Row, Col} from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import Product from '../../components/Product';
-import products from '../../products';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { ProductType } from '../../types/product';
 
 const HomePage = () => {
+
+    const [products, setProducts] = useState<ProductType[]>([])
+
+    const loadProducts = async () => {
+        const response = await axios.get(
+            'http://localhost:8000/api/products/',
+            {
+                headers: {
+                    "Content-Type": "application/json;charset=UTF-8"
+                },
+            });
+        const data = response.data as ProductType[];
+        setProducts(data);
+    }
+
+
+    useEffect(() => {
+        loadProducts()
+    }, [])
 
     return (
         <div>

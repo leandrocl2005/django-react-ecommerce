@@ -19,5 +19,11 @@ def get_routes(request):
 
 
 @api_view(['GET'])
-def get_products(request):
+def get_all_products(request):
     return Response(products)
+
+
+@api_view(['GET'])
+def get_single_product(request, pk):
+    product = filter(lambda p: p["_id"] == pk, products)
+    return Response(product)
